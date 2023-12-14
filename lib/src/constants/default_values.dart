@@ -20,6 +20,20 @@ const cOnBoardingSubtext3 = 'subtitle 3';
 const String cWelcomeTitle = 'Welcome User';
 const String cWelcomeSubtitle = 'welcome, lets get you on board!';
 
+//login screen
+const String cLoginTitle = 'Welcome Back';
+const String cLoginSubtitle = 'login subtitle';
+const String cRememberMe = 'Remember Me?';
+const String cForgotPassword = 'Forgot Password?';
+const String cAlreadyHaveAnAccount = 'Already have an account?';
+const String cDontHaveAnAccount = 'Don\'t have an account?';
+
 //default sizes
 const cDefaultSize = 30.0;
 const cButtonHeight = 15.0;
+
+//input labels
+const String cEmail = 'E-mail';
+const String cPassword = 'Password';
+const String cEmailPlaceholder = 'Enter your e-mail';
+const String cPasswordPlaceholder = 'Enter your password';

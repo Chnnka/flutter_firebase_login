@@ -3,6 +3,8 @@ import 'package:flutter_firebase_login/src/common_widgets/fade_in_animation/anim
 import 'package:flutter_firebase_login/src/common_widgets/fade_in_animation/fade_in_animation_controller.dart';
 import 'package:flutter_firebase_login/src/common_widgets/fade_in_animation/fade_in_animation_model.dart';
 import 'package:flutter_firebase_login/src/constants/constants.dart';
+import 'package:flutter_firebase_login/src/features/authentication/screens/screens.dart';
+
 import 'package:get/get.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -56,13 +58,15 @@ class WelcomeScreen extends StatelessWidget {
                   //login, sign up button
                   Row(
                     children: [
+                      //login button
                       Expanded(
                         child: OutlinedButton(
-                          onPressed: () {},
+                          onPressed: () => Get.to(() => const LoginScreen()),
                           child: const Text(cLoginText),
                         ),
                       ),
                       const SizedBox(width: 10),
+                      //sign up button
                       Expanded(
                         child: ElevatedButton(
                           onPressed: () {},

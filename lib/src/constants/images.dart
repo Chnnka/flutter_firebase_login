@@ -10,3 +10,6 @@ const String cOnBoardingImage3 = 'assets/images/on_boarding_images/3.png';
 //WELCOME SCREEN
 const String cWelcomeScreenImage =
     'assets/images/welcome_screen/welcome_image.png';
+
+//LOGIN SCREEN
+const String cGoogleLogo = 'assets/logo/google.png';
