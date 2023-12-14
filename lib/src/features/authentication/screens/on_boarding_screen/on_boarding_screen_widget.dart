@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_login/src/constants/constants.dart';
 
-import 'package:flutter_firebase_login/src/constants/default_values.dart';
 
 import 'package:flutter_firebase_login/src/features/authentication/models/model_on_boarding.dart';
 

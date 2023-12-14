@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_login/src/constants/constants.dart';
 import 'package:flutter_firebase_login/src/features/authentication/controllers/on_boarding_controller.dart';
 
-import 'package:flutter_firebase_login/src/constants/colors.dart';
+
 import 'package:get/get.dart';
 
 import 'package:liquid_swipe/liquid_swipe.dart';

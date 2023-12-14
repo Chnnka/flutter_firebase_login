@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'package:flutter_firebase_login/src/utils/theme/widget_theme/elevatedbutton_theme.dart';
-import 'package:flutter_firebase_login/src/utils/theme/widget_theme/outlinebutton_theme.dart';
-import 'package:flutter_firebase_login/src/utils/theme/widget_theme/text_theme.dart';
+import 'widget_theme/widget_theme.dart';
 
 class CAppTheme {
   CAppTheme._();
