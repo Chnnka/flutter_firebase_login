@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_login/src/constants/constants.dart';
+import 'package:flutter_firebase_login/src/features/authentication/screens/screens.dart';
+import 'package:get/get.dart';
 
-class LoginFooterWidget extends StatelessWidget {
-  const LoginFooterWidget({
+class FormFooterWidget extends StatelessWidget {
+  const FormFooterWidget({
     super.key,
   });
 
@@ -29,10 +31,10 @@ class LoginFooterWidget extends StatelessWidget {
         Align(
           alignment: Alignment.center,
           child: TextButton(
-            onPressed: () {},
+            onPressed: () => Get.to(() => const SignupScreen()),
             child: Text.rich(
               const TextSpan(
-                  text: cDontHaveAnAccount,
+                  text: '$cDontHaveAnAccount ',
                   children: [TextSpan(text: cSignUpText)]),
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                   color: Colors.blueAccent, fontWeight: FontWeight.w600),

@@ -1,28 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_login/src/common_widgets/form/footer_widget.dart';
+import 'package:flutter_firebase_login/src/common_widgets/form/header_widget.dart';
 import 'package:flutter_firebase_login/src/constants/constants.dart';
-import 'login_footer_widget.dart';
+
 import 'login_form_widget.dart';
-import 'login_header_widget.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
           child: Container(
             padding: const EdgeInsets.all(cDefaultSize),
-            child: Column(
+            child: const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                LoginHeaderWidget(size: size),
+                FormHeaderWidget(
+                  image: cOnBoardingImage3,
+                  title: cLoginTitle,
+                  subTitle: cLoginSubtitle,
+                ),
+
                 //form section
-                const LoginForm(),
-                LoginFooterWidget(),
+                LoginForm(),
+
+                FormFooterWidget(),
               ],
             ),
           ),
@@ -31,5 +37,3 @@ class LoginScreen extends StatelessWidget {
     );
   }
 }
-
-

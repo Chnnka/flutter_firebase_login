@@ -25,8 +25,12 @@ const String cLoginTitle = 'Welcome Back';
 const String cLoginSubtitle = 'login subtitle';
 const String cRememberMe = 'Remember Me?';
 const String cForgotPassword = 'Forgot Password?';
-const String cAlreadyHaveAnAccount = 'Already have an account?';
 const String cDontHaveAnAccount = 'Don\'t have an account?';
+
+//sign up screen
+const String cSignUpTitle = 'Welcome on board';
+const String cSignUpSubtitle = 'Create your profile to start your journey';
+const String cAlreadyHaveAnAccount = 'Already have an account?';
 
 //default sizes
 const cDefaultSize = 30.0;
