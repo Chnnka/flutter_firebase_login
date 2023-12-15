@@ -37,6 +37,7 @@ const cDefaultSize = 30.0;
 const cButtonHeight = 15.0;
 
 //input labels
+const String cFullName = 'Full Name';
 const String cEmail = 'E-mail';
 const String cPassword = 'Password';
 const String cEmailPlaceholder = 'Enter your e-mail';

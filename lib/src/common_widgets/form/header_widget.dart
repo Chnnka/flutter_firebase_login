@@ -24,7 +24,6 @@ class FormHeaderWidget extends StatelessWidget {
         ),
         Text(title, style: Theme.of(context).textTheme.headlineLarge),
         Text(subTitle, style: Theme.of(context).textTheme.headlineSmall),
-        const SizedBox(height: 20),
       ],
     );
   }

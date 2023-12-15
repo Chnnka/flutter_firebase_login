@@ -43,7 +43,7 @@ class LoginForm extends StatelessWidget {
           height: 50,
           child: ElevatedButton(
             onPressed: () {},
-            child: Text(cLoginText),
+            child: Text(cLoginText.toUpperCase()),
           ),
         ),
       ],

@@ -2,7 +2,7 @@ import 'package:flutter_firebase_login/src/constants/colors.dart';
 import 'package:flutter_firebase_login/src/constants/default_values.dart';
 import 'package:flutter_firebase_login/src/constants/images.dart';
 import 'package:flutter_firebase_login/src/features/authentication/models/model_on_boarding.dart';
-import 'package:flutter_firebase_login/src/features/authentication/screens/on_boarding_screen/on_boarding_screen_widget.dart';
+import 'package:flutter_firebase_login/src/features/authentication/screens/on_boarding_screen/widgets/on_boarding_screen_widget.dart';
 import 'package:get/get.dart';
 import 'package:liquid_swipe/PageHelpers/LiquidController.dart';
 

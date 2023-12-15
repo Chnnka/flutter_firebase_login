@@ -3,39 +3,42 @@ import 'package:flutter_firebase_login/src/constants/constants.dart';
 import 'package:flutter_firebase_login/src/features/authentication/screens/screens.dart';
 import 'package:get/get.dart';
 
-class FormFooterWidget extends StatelessWidget {
-  const FormFooterWidget({
+class SignupFooterWidget extends StatelessWidget {
+  const SignupFooterWidget({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(height: 5),
-        const Align(alignment: Alignment.center, child: Text('or')),
-        const SizedBox(height: 15),
+        const Text('or'),
+        const SizedBox(height: 10),
         SizedBox(
           width: double.infinity,
           height: 50,
-          child: OutlinedButton.icon(
-            icon: const Image(
-              image: AssetImage(cGoogleLogo),
-              width: 20,
-            ),
+          child: OutlinedButton(
             onPressed: () {},
-            label: const Text('Sign In with Google'),
+            child: const Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image(
+                  image: AssetImage(cGoogleLogo),
+                  height: 20,
+                ),
+                Text('Sign Up with Google')
+              ],
+            ),
           ),
         ),
         Align(
           alignment: Alignment.center,
           child: TextButton(
-            onPressed: () => Get.to(() => const SignupScreen()),
+            onPressed: () => Get.to(() => const LoginScreen()),
             child: Text.rich(
               const TextSpan(
-                  text: '$cDontHaveAnAccount ',
-                  children: [TextSpan(text: cSignUpText)]),
+                  text: '$cAlreadyHaveAnAccount ',
+                  children: [TextSpan(text: cLoginText)]),
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                   color: Colors.blueAccent, fontWeight: FontWeight.w600),
             ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 const cPrimaryColor = Color(0xFFFFE400);
-const cSecondaryColor = Color.fromARGB(255, 24, 24, 22);
+const cSecondaryColor = Color.fromARGB(255, 36, 36, 33);
 const cAccentyColor = Color.fromARGB(255, 0, 31, 116);
 
 const cCardBgColor = Color(0xFFF7F6F1);
