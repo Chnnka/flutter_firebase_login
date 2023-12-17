@@ -16,6 +16,7 @@ class FormFooterWidget extends StatelessWidget {
         const SizedBox(height: 5),
         const Align(alignment: Alignment.center, child: Text('or')),
         const SizedBox(height: 15),
+        //sign in with google
         SizedBox(
           width: double.infinity,
           height: 50,
@@ -28,6 +29,7 @@ class FormFooterWidget extends StatelessWidget {
             label: const Text('Sign In with Google'),
           ),
         ),
+        //dont have an account?
         Align(
           alignment: Alignment.center,
           child: TextButton(

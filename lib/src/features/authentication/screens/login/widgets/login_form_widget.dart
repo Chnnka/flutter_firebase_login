@@ -34,7 +34,12 @@ class LoginForm extends StatelessWidget {
         Align(
           alignment: Alignment.centerRight,
           child: TextButton(
-            onPressed: () {},
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                builder: (context) => Container(),
+              );
+            },
             child: const Text(cForgotPassword),
           ),
         ),

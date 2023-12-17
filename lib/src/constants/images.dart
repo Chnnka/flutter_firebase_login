@@ -13,3 +13,6 @@ const String cWelcomeScreenImage =
 
 //LOGIN SCREEN
 const String cGoogleLogo = 'assets/logo/google.png';
+
+//FORGOT PASSWORD SCREEN
+const String cForgotPasswordImg = 'assets/images/forgot_password/';

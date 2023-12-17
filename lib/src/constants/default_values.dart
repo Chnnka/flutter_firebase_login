@@ -42,3 +42,15 @@ const String cEmail = 'E-mail';
 const String cPassword = 'Password';
 const String cEmailPlaceholder = 'Enter your e-mail';
 const String cPasswordPlaceholder = 'Enter your password';
+
+//forgot password screen
+const String cForgotPasswordBtmsheetTitle = 'Make Selection';
+const String cForgotPasswordBtmsheetSubtitle =
+    'Select on of the method to reset your password';
+const String cResetViaEmail = 'Reset Via E-mail Verification';
+const String cResetViaPhone = 'Reset Via Phone Verification';
+
+const String cForgotPhoneSubtitle =
+    'Enter your registered phone number to recieve OTP';
+const String cForgotEmailSubtitle =
+    'Enter your registered email address to recieve OTP';
