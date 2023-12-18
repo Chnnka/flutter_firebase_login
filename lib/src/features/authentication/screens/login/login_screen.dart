@@ -26,6 +26,7 @@ class LoginScreen extends StatelessWidget {
                   title: cLoginTitle,
                   subTitle: cLoginSubtitle,
                 ),
+                SizedBox(height: 16),
                 //form section
                 LoginForm(),
                 //footer

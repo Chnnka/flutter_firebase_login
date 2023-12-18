@@ -39,9 +39,11 @@ const cButtonHeight = 15.0;
 //input labels
 const String cFullName = 'Full Name';
 const String cEmail = 'E-mail';
+const String cPhone = 'Phone';
 const String cPassword = 'Password';
 const String cEmailPlaceholder = 'Enter your e-mail';
 const String cPasswordPlaceholder = 'Enter your password';
+const String cNext = 'Next';
 
 //forgot password screen
 const String cForgotPasswordBtmsheetTitle = 'Make Selection';
@@ -54,3 +56,5 @@ const String cForgotPhoneSubtitle =
     'Enter your registered phone number to recieve OTP';
 const String cForgotEmailSubtitle =
     'Enter your registered email address to recieve OTP';
+const String cOTPsubtitle = 'Verification';
+const String cOTPmessage = 'Enter the verification code sent at ';

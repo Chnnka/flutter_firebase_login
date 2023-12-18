@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_login/src/constants/constants.dart';
 
+import '../../forgot_password/forgot_password_options/forgot_password_options.dart';
+
 class LoginForm extends StatelessWidget {
   const LoginForm({
     super.key,
@@ -35,14 +37,12 @@ class LoginForm extends StatelessWidget {
           alignment: Alignment.centerRight,
           child: TextButton(
             onPressed: () {
-              showModalBottomSheet(
-                context: context,
-                builder: (context) => Container(),
-              );
+              ForgotPasswordScreen.buildShowModelBottomSheet(context);
             },
             child: const Text(cForgotPassword),
           ),
         ),
+        //LOGIN BUTTON
         SizedBox(
           width: double.infinity,
           height: 50,

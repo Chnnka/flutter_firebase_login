@@ -29,7 +29,7 @@ class FormFooterWidget extends StatelessWidget {
             label: const Text('Sign In with Google'),
           ),
         ),
-        //dont have an account?
+        //dont have an account / already have an acc?
         Align(
           alignment: Alignment.center,
           child: TextButton(
