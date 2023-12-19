@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_login/src/constants/constants.dart';
+import 'package:flutter_firebase_login/src/features/core/screens/dashboard/dashboard.dart';
+import 'package:get/get.dart';
 
 import '../../forgot_password/forgot_password_options/forgot_password_options.dart';
 
@@ -47,7 +49,9 @@ class LoginForm extends StatelessWidget {
           width: double.infinity,
           height: 50,
           child: ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              Get.to(() => const Dashboard()); 
+            },
             child: Text(cLoginText.toUpperCase()),
           ),
         ),
