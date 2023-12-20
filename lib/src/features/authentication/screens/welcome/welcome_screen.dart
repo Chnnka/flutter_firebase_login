@@ -69,7 +69,9 @@ class WelcomeScreen extends StatelessWidget {
                       //sign up button
                       Expanded(
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.to(() => const SignupScreen());
+                          },
                           child: const Text(cSignUpText),
                         ),
                       ),
