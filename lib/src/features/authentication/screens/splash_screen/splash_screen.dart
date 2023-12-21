@@ -16,12 +16,6 @@ class SplashScreen extends StatelessWidget {
       body: Stack(
         children: [
           CFadeInAnimation(
-            durationInMs: 1500,
-            animate: CAnimatedPosition(
-                topAfter: 0, topBefore: -30, leftBefore: -30, leftAfter: 0),
-            child: const Image(image: AssetImage(cSplashLogo)),
-          ),
-          CFadeInAnimation(
             durationInMs: 2000,
             animate: CAnimatedPosition(
                 topAfter: 80, topBefore: 80, leftAfter: 189, leftBefore: -80),
@@ -33,14 +27,6 @@ class SplashScreen extends StatelessWidget {
                 Text('tagline',
                     style: Theme.of(context).textTheme.headlineSmall),
               ],
-            ),
-          ),
-          CFadeInAnimation(
-            durationInMs: 2400,
-            animate: CAnimatedPosition(bottomBefore: 0, bottomAfter: 100),
-            child: const Image(
-              height: 330,
-              image: AssetImage(cSplashImage),
             ),
           ),
           CFadeInAnimation(

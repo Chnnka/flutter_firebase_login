@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_login/src/constants/constants.dart';
+import 'package:flutter_firebase_login/src/features/authentication/controllers/otp_controller.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 
 class OTPScreen extends StatelessWidget {
@@ -7,6 +8,7 @@ class OTPScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var otp;
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
@@ -29,14 +31,19 @@ class OTPScreen extends StatelessWidget {
               filled: true,
               fillColor: Colors.black.withOpacity(0.2),
               keyboardType: TextInputType.number,
-              onSubmit: (code) {},
+              onSubmit: (code) {
+                otp = code;
+                OTPController.instance.verifyOTP(otp);
+              },
             ),
             const SizedBox(height: cDefaultPaddingValue),
             SizedBox(
               width: double.infinity,
               height: 50,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  OTPController.instance.verifyOTP(otp);
+                },
                 child: const Text('Next'),
               ),
             ),

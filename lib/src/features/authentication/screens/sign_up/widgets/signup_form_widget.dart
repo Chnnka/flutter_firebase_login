@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_login/src/constants/constants.dart';
 import 'package:flutter_firebase_login/src/features/authentication/controllers/signup_controller.dart';
+import 'package:flutter_firebase_login/src/features/authentication/screens/forgot_password/forgot_password_otp/otp_screen.dart';
+
 import 'package:get/get.dart';
 
 class SignUpFormWidget extends StatelessWidget {
@@ -62,15 +64,19 @@ class SignUpFormWidget extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 20),
+          //SIGN UP BUTTON
           SizedBox(
             width: double.infinity,
             height: 50,
             child: ElevatedButton(
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
-                  SignUpController.instance.registerUser(
-                      controller.email.text.trim(),
-                      controller.password.text.trim());
+                  // SignUpController.instance.registerUser(
+                  //     controller.email.text.trim(),
+                  //     controller.password.text.trim());
+                  SignUpController.instance
+                      .phoneAuthentication(controller.phoneNo.text.trim());
+                  Get.to(() => const OTPScreen());
                 }
               },
               child: Text(cSignUpText.toUpperCase()),
