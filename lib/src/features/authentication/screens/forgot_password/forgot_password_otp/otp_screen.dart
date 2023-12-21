@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_firebase_login/src/constants/constants.dart';
 import 'package:flutter_firebase_login/src/features/authentication/controllers/otp_controller.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
+import 'package:get/get.dart';
 
 class OTPScreen extends StatelessWidget {
   const OTPScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var otpController = Get.put(OTPController());
     var otp;
     return Scaffold(
       body: Container(
