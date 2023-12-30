@@ -1,5 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_login/src/features/core/screens/profile/update_profile_screen.dart';
+import 'package:get/get.dart';
 import 'package:modern_form_line_awesome_icons/modern_form_line_awesome_icons.dart';
 
 import 'package:flutter_firebase_login/src/constants/constants.dart';
@@ -30,17 +32,41 @@ class ProfileScreen extends StatelessWidget {
           padding: const EdgeInsets.all(cDefaultPaddingValue),
           child: Column(
             children: [
-              SizedBox(
-                width: 120,
-                height: 120,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(100),
-                  child: const Image(
-                    image: AssetImage(
-                      cOnBoardingImage3,
+              Stack(
+                children: [
+                  SizedBox(
+                    width: 120,
+                    height: 120,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(100),
+                      child: const Image(
+                        image: AssetImage(
+                          cOnBoardingImage3,
+                        ),
+                      ),
                     ),
                   ),
-                ),
+                  Positioned(
+                    bottom: 0,
+                    right: 0,
+                    child: GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        width: 35,
+                        height: 35,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: cPrimaryColor,
+                        ),
+                        child: const Icon(
+                          LineAwesomeIcons.pencil,
+                          color: Colors.black,
+                          size: 18.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(height: 10),
               Text('Profile Heading',
@@ -48,10 +74,11 @@ class ProfileScreen extends StatelessWidget {
               Text('Profile Sub heading',
                   style: Theme.of(context).textTheme.bodySmall),
               const SizedBox(height: 20),
+              //EDIT PROFILE BUTTON
               SizedBox(
                 width: 200,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () => Get.to(() => const UpdateProfileScreen()),
                   child: const Text('Edit Profile'),
                 ),
               ),

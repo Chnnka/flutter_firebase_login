@@ -58,3 +58,6 @@ const String cForgotEmailSubtitle =
     'Enter your registered email address to recieve OTP';
 const String cOTPsubtitle = 'Verification';
 const String cOTPmessage = 'Enter the verification code sent at ';
+
+//profile
+const String cUpdateProfile = 'Update Profile';
