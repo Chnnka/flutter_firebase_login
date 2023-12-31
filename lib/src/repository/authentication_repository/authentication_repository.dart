@@ -14,7 +14,6 @@ class AuthenticationRepository extends GetxController {
 
   @override
   void onReady() {
-    Future.delayed(const Duration(seconds: 6));
     firebaseUser = Rx<User?>(_auth.currentUser);
     firebaseUser.bindStream(_auth.userChanges());
     ever(firebaseUser, _setInitialScreen);
@@ -28,6 +27,20 @@ class AuthenticationRepository extends GetxController {
   }
 
   //FUNCTIONS
+
+  //phone authentication
+  loginWithPhoneNo(String phoneNumber) async {
+    try {
+      await _auth.signInWithPhoneNumber(phoneNumber);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'invalid-phone-number') {
+        Get.snackbar('Error', 'Invalid Phone Number');
+      }
+    } catch (_) {
+      Get.snackbar('Error', 'Something went wrong.');
+    }
+  }
+
   Future<void> phoneAuthentication(String phoneNo) async {
     await _auth.verifyPhoneNumber(
       phoneNumber: phoneNo,
