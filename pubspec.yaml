@@ -19,8 +19,12 @@ dependencies:
   liquid_swipe: ^3.1.0
   smooth_page_indicator: ^1.1.0
   flutter_otp_text_field: ^1.1.1
+
+  #FIREBASE
   firebase_core: ^2.24.2
   firebase_auth: ^4.15.3
+  cloud_firestore: ^4.13.6
+
   modern_form_line_awesome_icons: ^2.0.1
 
 dev_dependencies:

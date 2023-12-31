@@ -89,6 +89,53 @@ class UpdateProfileScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 10),
+                      TextFormField(
+                        decoration: const InputDecoration(
+                          label: Text(cPassword),
+                          prefixIcon: Icon(
+                            Icons.fingerprint,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          child: const Text('Save'),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text.rich(
+                            TextSpan(
+                              text: 'Joined:',
+                              style: TextStyle(fontSize: 12),
+                              children: [
+                                TextSpan(
+                                  text: '31 December 2023',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor:
+                                  Colors.redAccent.withOpacity(0.2),
+                              foregroundColor: Colors.red,
+                              shape: const StadiumBorder(),
+                              side: BorderSide.none,
+                            ),
+                            onPressed: () {},
+                            child: const Text('Delete'),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 ),
