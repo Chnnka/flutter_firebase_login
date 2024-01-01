@@ -22,12 +22,18 @@ class UpdateProfileScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(cDefaultSize),
+          //using future builder to load cloud data
           child: FutureBuilder(
-            future: controller.getAllUser(),
+            future: controller.getUserData(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 if (snapshot.hasData) {
-                  UserModel userData = snapshot.data as UserModel;
+                  UserModel user = snapshot.data as UserModel;
+                  // --- Controllers --- //
+                  final email = TextEditingController(text: user.email);
+                  final password = TextEditingController(text: user.password);
+                  final fullName = TextEditingController(text: user.fullName);
+                  final phoneNo = TextEditingController(text: user.phoneNo);
                   return Column(
                     children: [
                       Stack(
@@ -71,8 +77,9 @@ class UpdateProfileScreen extends StatelessWidget {
                         child: Form(
                           child: Column(
                             children: [
+                              // --- full name
                               TextFormField(
-                                initialValue: userData.fullName,
+                                controller: fullName,
                                 decoration: const InputDecoration(
                                   label: Text(cFullName),
                                   prefixIcon: Icon(
@@ -81,8 +88,9 @@ class UpdateProfileScreen extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(height: 10),
+                              // --- email
                               TextFormField(
-                                initialValue: userData.email,
+                                controller: email,
                                 decoration: const InputDecoration(
                                   label: Text(cEmail),
                                   prefixIcon: Icon(
@@ -91,8 +99,9 @@ class UpdateProfileScreen extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(height: 10),
+                              // --- phone number
                               TextFormField(
-                                initialValue: userData.phoneNo,
+                                controller: phoneNo,
                                 decoration: const InputDecoration(
                                   label: Text(cPhone),
                                   prefixIcon: Icon(
@@ -101,8 +110,9 @@ class UpdateProfileScreen extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(height: 10),
+                              // --- password
                               TextFormField(
-                                initialValue: userData.password,
+                                controller: password,
                                 decoration: const InputDecoration(
                                   label: Text(cPassword),
                                   prefixIcon: Icon(
@@ -111,10 +121,20 @@ class UpdateProfileScreen extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(height: 20),
+
+                              // --- Form submit button --- //
                               SizedBox(
                                 width: double.infinity,
                                 child: ElevatedButton(
-                                  onPressed: () {},
+                                  onPressed: () async {
+                                    final userData = UserModel(
+                                      fullName: fullName.text.trim(),
+                                      email: email.text.trim(),
+                                      phoneNo: phoneNo.text.trim(),
+                                      password: password.text.trim(),
+                                    );
+                                    await controller.updateRecord(userData);
+                                  },
                                   child: const Text('Save'),
                                 ),
                               ),
