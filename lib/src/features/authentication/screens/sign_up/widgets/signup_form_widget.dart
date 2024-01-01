@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_firebase_login/src/constants/constants.dart';
 import 'package:flutter_firebase_login/src/features/authentication/controllers/signup_controller.dart';
 import 'package:flutter_firebase_login/src/features/authentication/models/user_model.dart';
-import 'package:flutter_firebase_login/src/features/authentication/screens/forgot_password/forgot_password_otp/otp_screen.dart';
+
 
 import 'package:get/get.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_login/src/features/core/screens/profile/profile_screen.dart';
-import 'package:flutter_firebase_login/src/repository/authentication_repository/authentication_repository.dart';
+
 import 'package:get/get.dart';
 
 class DashboardAppbar extends StatelessWidget implements PreferredSizeWidget {

@@ -1,3 +1,4 @@
+import 'package:flutter_firebase_login/src/features/authentication/models/user_model.dart';
 import 'package:flutter_firebase_login/src/repository/authentication_repository/authentication_repository.dart';
 import 'package:flutter_firebase_login/src/repository/user_repository/user_repository.dart';
 import 'package:get/get.dart';
@@ -16,5 +17,9 @@ class ProfileController extends GetxController {
     } else {
       Get.snackbar('Error', 'Login to continue');
     }
+  }
+
+  Future<List<UserModel>> getAllUser() async {
+    return await _userRepo.allUser();
   }
 }

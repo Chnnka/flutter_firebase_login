@@ -23,7 +23,7 @@ class UpdateProfileScreen extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(cDefaultSize),
           child: FutureBuilder(
-            future: controller.getUserData(),
+            future: controller.getAllUser(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 if (snapshot.hasData) {
@@ -166,7 +166,7 @@ class UpdateProfileScreen extends StatelessWidget {
                   );
                 }
               } else {
-                return Center(
+                return const Center(
                   child: CircularProgressIndicator(),
                 );
               }
