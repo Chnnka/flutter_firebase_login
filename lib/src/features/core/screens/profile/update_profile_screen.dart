@@ -124,6 +124,7 @@ class UpdateProfileScreen extends StatelessWidget {
 
                               // --- Form submit button --- //
                               SizedBox(
+                                
                                 width: double.infinity,
                                 child: ElevatedButton(
                                   onPressed: () async {

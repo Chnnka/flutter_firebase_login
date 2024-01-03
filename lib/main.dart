@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 // import 'package:flutter_firebase_login/src/features/authentication/screens/screens.dart';
 import 'package:flutter_firebase_login/src/repository/authentication_repository/authentication_repository.dart';
 import 'package:flutter_firebase_login/src/utils/theme/theme.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 
 import 'firebase_options.dart';
 
-void main() {
+Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding:widgetsBinding);
   Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
       .then((value) => Get.put(AuthenticationRepository()));
   runApp(const MyApp());

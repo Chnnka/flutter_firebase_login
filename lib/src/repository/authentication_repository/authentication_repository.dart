@@ -1,22 +1,33 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_firebase_login/src/exceptions/c_exceptions.dart';
 import 'package:flutter_firebase_login/src/features/authentication/screens/screens.dart';
 import 'package:flutter_firebase_login/src/features/core/screens/dashboard/dashboard.dart';
 import 'package:flutter_firebase_login/src/repository/authentication_repository/exceptions/signup_email_password_failure.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 
 class AuthenticationRepository extends GetxController {
   static AuthenticationRepository get instance => Get.find();
 
   //Variables
-  final _auth = FirebaseAuth.instance;
   late final Rx<User?> firebaseUser;
+  final _auth = FirebaseAuth.instance;
+  final _phoneVerificationId = ''.obs;
+  late final GoogleSignInAccount _googleUser;
   var verificationId = ''.obs;
 
+  //Getters
+  User? get firebaseUser => _firebaseUser.value;
+  String get getUserId => firebaseUser?.uid ?? "";
+  String get getUserEmail => firebaseUser?.email ?? "";
+
+  ///loads when app  launch from main.dart
   @override
   void onReady() {
-    firebaseUser = Rx<User?>(_auth.currentUser);
-    firebaseUser.bindStream(_auth.userChanges());
-    ever(firebaseUser, _setInitialScreen);
+    _firebaseUser = Rx<User?>(_auth.currentUser);
+    _firebaseUser.bindStream(_auth.userChanges());
+    FlutterNativeSplash.remove();
+    ever(_firebaseUser, _setInitialScreen);
   }
 
   //setting initial screen on load
@@ -27,8 +38,64 @@ class AuthenticationRepository extends GetxController {
   }
 
   //FUNCTIONS
+  // ------------------- LOGIN ------------------//
+  Future<String?> loginUserWithEmailAndPassword(
+      String email, String password) async {
+    try {
+      await _auth.signInWithEmailAndPassword(email: email, password: password);
+    } on FirebaseAuthException catch (e) {
+      final ex = SignUpWithEmailAndPasswordFailure.code(e.code);
+      // ignore: avoid_print
+      print('Firebase auth exceptipn - ${ex.message}');
+    } catch (_) {
+      const ex = SignUpWithEmailAndPasswordFailure();
+      // ignore: avoid_print
+      print('exceptipn - ${ex.message}');
+    }
+    return null;
+  }
 
-  //phone authentication
+  // -------------- REGISTER -------------------------//
+  Future<String?> createUserWithEmailAndPassword(
+      String email, String password) async {
+    try {
+      await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+
+      firebaseUser.value != null
+          ? Get.offAll(() => const Dashboard())
+          : Get.to(() => const WelcomeScreen());
+    } on FirebaseAuthException catch (e) {
+      final ex = SignUpWithEmailAndPasswordFailure.code(e.code);
+      // ignore: avoid_print
+      print('Firebase auth exceptipn - ${ex.message}');
+      throw ex;
+    } catch (_) {
+      const ex = SignUpWithEmailAndPasswordFailure();
+      // ignore: avoid_print
+      print('exceptipn - ${ex.message}');
+      throw ex;
+    }
+    return null;
+  }
+
+  // -------------- VERIFICATION -------------------------//
+  Future<void> sendEmailVerification() async {
+    try {
+      await _auth.currentUser?.sendEmailVerification();
+    } on FirebaseAuthException catch (e) {
+      final ex = CExceptions.fromCode(e.code);
+      throw ex.message;
+    } catch (_) {
+      const ex = CExceptions();
+      throw ex.message;
+    }
+  }
+
+  // ------- GOOGLE SIGN IN --------------------//
+  Future<UserCredential> signInWithGoogle() async {}
+
+  // -------------------- phone authentication --------------//
   loginWithPhoneNo(String phoneNumber) async {
     try {
       await _auth.signInWithPhoneNumber(phoneNumber);
@@ -41,6 +108,7 @@ class AuthenticationRepository extends GetxController {
     }
   }
 
+  // phone authentication Verification
   Future<void> phoneAuthentication(String phoneNo) async {
     await _auth.verifyPhoneNumber(
       phoneNumber: phoneNo,
@@ -68,45 +136,6 @@ class AuthenticationRepository extends GetxController {
         PhoneAuthProvider.credential(
             verificationId: verificationId.value, smsCode: otp));
     return credentials.user != null ? true : false;
-  }
-
-  Future<String?> createUserWithEmailAndPassword(
-      String email, String password) async {
-    try {
-      await _auth.createUserWithEmailAndPassword(
-          email: email, password: password);
-
-      firebaseUser.value != null
-          ? Get.offAll(() => const Dashboard())
-          : Get.to(() => const WelcomeScreen());
-    } on FirebaseAuthException catch (e) {
-      final ex = SignUpWithEmailAndPasswordFailure.code(e.code);
-      // ignore: avoid_print
-      print('Firebase auth exceptipn - ${ex.message}');
-      throw ex;
-    } catch (_) {
-      const ex = SignUpWithEmailAndPasswordFailure();
-      // ignore: avoid_print
-      print('exceptipn - ${ex.message}');
-      throw ex;
-    }
-    return null;
-  }
-
-  Future<String?> loginUserWithEmailAndPassword(
-      String email, String password) async {
-    try {
-      await _auth.signInWithEmailAndPassword(email: email, password: password);
-    } on FirebaseAuthException catch (e) {
-      final ex = SignUpWithEmailAndPasswordFailure.code(e.code);
-      // ignore: avoid_print
-      print('Firebase auth exceptipn - ${ex.message}');
-    } catch (_) {
-      const ex = SignUpWithEmailAndPasswordFailure();
-      // ignore: avoid_print
-      print('exceptipn - ${ex.message}');
-    }
-    return null;
   }
 
   Future<void> logout() async => await _auth.signOut();
