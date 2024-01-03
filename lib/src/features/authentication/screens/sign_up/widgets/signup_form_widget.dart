@@ -3,7 +3,6 @@ import 'package:flutter_firebase_login/src/constants/constants.dart';
 import 'package:flutter_firebase_login/src/features/authentication/controllers/signup_controller.dart';
 import 'package:flutter_firebase_login/src/features/authentication/models/user_model.dart';
 
-
 import 'package:get/get.dart';
 
 class SignUpFormWidget extends StatelessWidget {
@@ -66,26 +65,20 @@ class SignUpFormWidget extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           //SIGN UP BUTTON
-          SizedBox(
-            width: double.infinity,
-            height: 50,
-            child: ElevatedButton(
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  // SignUpController.instance.registerUser(
-                  //     controller.email.text.trim(),
-                  //     controller.password.text.trim());
-
-                  final user = UserModel(
-                      fullName: controller.fullName.text.trim(),
-                      email: controller.email.text.trim(),
-                      password: controller.password.text.trim(),
-                      phoneNo: controller.phoneNo.text.trim());
-                  SignUpController.instance.createUser(user);
-
-                }
-              },
-              child: Text(cSignUpText.toUpperCase()),
+          Obx(
+            () => SizedBox(
+              width: double.infinity,
+              height: 50,
+              child: ElevatedButton(
+                isLoading: controller.isLoading.value ? true : false,
+                onPressed: controller.isFacebookLoading.value ||
+                        controller.isGoogleLoading.value
+                    ? () {}
+                    : controller.isLoading.value
+                        ? () {}
+                        : () => controller.createUser(),
+                child: Text(cSignUpText.toUpperCase()),
+              ),
             ),
           ),
           const SizedBox(height: 10),

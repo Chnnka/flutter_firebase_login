@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_firebase_login/src/exceptions/c_exceptions.dart';
+import 'package:flutter_firebase_login/src/features/authentication/screens/mail_verification/mail_verification.dart';
 import 'package:flutter_firebase_login/src/features/authentication/screens/screens.dart';
 import 'package:flutter_firebase_login/src/features/core/screens/dashboard/dashboard.dart';
 import 'package:flutter_firebase_login/src/repository/authentication_repository/exceptions/signup_email_password_failure.dart';
@@ -10,7 +12,7 @@ class AuthenticationRepository extends GetxController {
   static AuthenticationRepository get instance => Get.find();
 
   //Variables
-  late final Rx<User?> firebaseUser;
+  late final Rx<User?> _firebaseUser;
   final _auth = FirebaseAuth.instance;
   final _phoneVerificationId = ''.obs;
   late final GoogleSignInAccount _googleUser;
@@ -27,14 +29,17 @@ class AuthenticationRepository extends GetxController {
     _firebaseUser = Rx<User?>(_auth.currentUser);
     _firebaseUser.bindStream(_auth.userChanges());
     FlutterNativeSplash.remove();
-    ever(_firebaseUser, _setInitialScreen);
+    setInitialScreen(_firebaseUser.value);
+    // ever(_firebaseUser, _setInitialScreen);
   }
 
   //setting initial screen on load
-  _setInitialScreen(User? user) {
+  setInitialScreen(User? user) {
     user == null
         ? Get.offAll(() => const WelcomeScreen())
-        : Get.offAll(() => const Dashboard());
+        : user.emailVerified
+            ? Get.offAll(() => const Dashboard())
+            : Get.offAll(() => const MailVerificationScreen());
   }
 
   //FUNCTIONS
@@ -62,7 +67,7 @@ class AuthenticationRepository extends GetxController {
       await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
 
-      firebaseUser.value != null
+      _firebaseUser.value != null
           ? Get.offAll(() => const Dashboard())
           : Get.to(() => const WelcomeScreen());
     } on FirebaseAuthException catch (e) {
@@ -138,5 +143,18 @@ class AuthenticationRepository extends GetxController {
     return credentials.user != null ? true : false;
   }
 
-  Future<void> logout() async => await _auth.signOut();
+  Future<void> logout() async {
+    try {
+      await GoogleSignIn().signOut();
+      await FacebookAuth.instance.logOut();
+      await FirebaseAuth.instance.signOut();
+      Get.offAll(() => const LoginScreen());
+    } on FirebaseAuthException catch (e) {
+      throw e.message!;
+    } on FormatException catch (e) {
+      throw e.message;
+    } catch (e) {
+      throw 'Unable to logout, try again';
+    }
+  }
 }

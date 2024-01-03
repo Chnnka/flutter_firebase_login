@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_login/src/constants/constants.dart';
+import 'package:flutter_firebase_login/src/features/authentication/controllers/mail_verification_controller.dart';
 import 'package:flutter_firebase_login/src/repository/authentication_repository/authentication_repository.dart';
 import 'package:get/get.dart';
 import 'package:modern_form_line_awesome_icons/modern_form_line_awesome_icons.dart';
 
-class MailVerification extends StatelessWidget {
-  const MailVerification({super.key});
+class MailVerificationScreen extends StatelessWidget {
+  const MailVerificationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
