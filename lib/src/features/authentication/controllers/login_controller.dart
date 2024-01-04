@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+
+import 'package:flutter_firebase_login/src/features/authentication/controllers/helper_controller.dart';
 import 'package:flutter_firebase_login/src/repository/authentication_repository/authentication_repository.dart';
 import 'package:get/get.dart';
 
@@ -17,6 +18,7 @@ class LoginController extends GetxController {
   final isGoogleLoading = false.obs;
   final isFacebookLoading = false.obs;
 
+  //email and password login
   Future<void> login() async {
     try {
       isLoading.value = true;
@@ -30,9 +32,23 @@ class LoginController extends GetxController {
       auth.setInitialScreen(auth.firebaseUser);
     } catch (e) {
       isLoading.value = false;
-      Helper.errorSnackBar(time: 'Ohno', message: e.toString());
+      Helper.errorSnackBar(title: 'Ohno', message: e.toString());
     }
   }
+
+  //google sign in authentication
+  Future<void> googleSignIn() async {
+    try {
+      isGoogleLoading.value = true;
+      await AuthenticationRepository.instance.signInWithGoogle();
+      isGoogleLoading.value = false;
+    } catch (e) {
+      isGoogleLoading.value = false;
+      Helper.errorSnackBar(title: 'Error', message: e.toString());
+    }
+  }
+
+  Future<void> facebookSignIn() async{}
 
   // call this function from design
   Future<void> loginUser(String email, String password) async {

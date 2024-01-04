@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_login/src/constants/constants.dart';
 import 'package:flutter_firebase_login/src/features/authentication/controllers/signup_controller.dart';
-import 'package:flutter_firebase_login/src/features/authentication/models/user_model.dart';
-
+// import 'package:flutter_firebase_login/src/features/authentication/controllers/login_controller.dart';
 import 'package:get/get.dart';
 
 class SignUpFormWidget extends StatelessWidget {

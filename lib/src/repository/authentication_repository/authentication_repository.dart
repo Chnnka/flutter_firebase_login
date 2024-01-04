@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
+
 import 'package:flutter_firebase_login/src/exceptions/c_exceptions.dart';
 import 'package:flutter_firebase_login/src/features/authentication/screens/mail_verification/mail_verification.dart';
 import 'package:flutter_firebase_login/src/features/authentication/screens/screens.dart';
@@ -7,6 +7,8 @@ import 'package:flutter_firebase_login/src/features/core/screens/dashboard/dashb
 import 'package:flutter_firebase_login/src/repository/authentication_repository/exceptions/signup_email_password_failure.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+// import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
 class AuthenticationRepository extends GetxController {
   static AuthenticationRepository get instance => Get.find();
@@ -14,7 +16,7 @@ class AuthenticationRepository extends GetxController {
   //Variables
   late final Rx<User?> _firebaseUser;
   final _auth = FirebaseAuth.instance;
-  final _phoneVerificationId = ''.obs;
+  // final _phoneVerificationId = ''.obs;
   late final GoogleSignInAccount _googleUser;
   var verificationId = ''.obs;
 
@@ -98,7 +100,44 @@ class AuthenticationRepository extends GetxController {
   }
 
   // ------- GOOGLE SIGN IN --------------------//
-  Future<UserCredential> signInWithGoogle() async {}
+  Future<UserCredential> signInWithGoogle() async {
+    try {
+      // Trigger the authentication flow
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+      // Obtain the auth details from the request
+      final GoogleSignInAuthentication? googleAuth =
+          await googleUser?.authentication;
+
+      // Create a new credential
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+
+      // Once signed in, return the UserCredential
+      return await FirebaseAuth.instance.signInWithCredential(credential);
+    } on FirebaseAuthException catch (e) {
+      final ex = CExceptions.fromCode(e.code);
+      throw ex.message;
+    } catch (_) {
+      const ex = CExceptions();
+      throw ex.message;
+    }
+    
+  }
+
+  // ------- Facebook SIGN IN --------------------//
+  // Future<UserCredential> signInWithFacebook() async {
+  //   // Trigger the sign-in flow
+  //   final LoginResult loginResult = await FacebookAuth.instance.login();
+
+  //   // Create a credential from the access token
+  //   final OAuthCredential facebookAuthCredential = FacebookAuthProvider.credential(loginResult.accessToken.token);
+
+  //   // Once signed in, return the UserCredential
+  //   return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
+  // }
 
   // -------------------- phone authentication --------------//
   loginWithPhoneNo(String phoneNumber) async {
@@ -113,7 +152,7 @@ class AuthenticationRepository extends GetxController {
     }
   }
 
-  // phone authentication Verification
+  // phone authentication Verification (register)
   Future<void> phoneAuthentication(String phoneNo) async {
     await _auth.verifyPhoneNumber(
       phoneNumber: phoneNo,
@@ -146,7 +185,7 @@ class AuthenticationRepository extends GetxController {
   Future<void> logout() async {
     try {
       await GoogleSignIn().signOut();
-      await FacebookAuth.instance.logOut();
+      // await FacebookAuth.instance.logOut();
       await FirebaseAuth.instance.signOut();
       Get.offAll(() => const LoginScreen());
     } on FirebaseAuthException catch (e) {
